@@ -1,5 +1,8 @@
+import java.util.*;
 public class Rotor {
-    char[] emap, dmap;  // encode map and decode map instance variables
+    Map <Character, Character> emap = new HashMap<Character, Character>();
+    Map <Character, Character> dmap = new HashMap<Character, Character>();
+	//char[] emap, dmap;  // encode map and decode map instance variables
     int pos;            // current position of the rotor
 
     // The parameter alphaperm below is a permutation of ['a','z']
@@ -10,17 +13,18 @@ public class Rotor {
 	    System.exit(1);
 	}
 
-	emap = new char[alphaperm.length];   // encode map instance variable
-	dmap = new char[alphaperm.length];   // decode map instance variable
+	//emap = new char[alphaperm.length];   // encode map instance variable
+	//dmap = new char[alphaperm.length];   // decode map instance variable
 
 	pos = startpos - 'a';  // startpos is a letter, 'a'-'z'
 
 	for (int i = 0; i < alphaperm.length; i++) {  // build encode map
-	    emap[i] = alphaperm[i];   // automatically converts to char
+	    emap.put((char) (i +'a') ,alphaperm[i]);   // automatically converts to char
 	}
 
-	for (int i = 0; i < emap.length; i++) {  // build decode (reverse) map
-            dmap[emap[i]-'a'] = (char) (i + 'a');
+	for (int i = 0; i < 26; i++) {  // build decode (reverse) map
+		char p1 = emap.get((char)(i + 'a'));
+		dmap.put(p1, (char)(i+'a'));
 	}
 
 	// for debugging below
@@ -45,7 +49,7 @@ public class Rotor {
 	// then adds the rotor orientation position, pos
 	// then mods with 26 to handle "wrap around"
 	int input_contact_pos = (ch - 'a' + pos) % 26;
-	return emap[input_contact_pos];
+	return emap.get((char) (input_contact_pos + 'a'));
     }
 
     // decode one character, ch, according to the rotor "wiring"
@@ -57,7 +61,7 @@ public class Rotor {
 
     public char decode(char ch) {
 	// formula in brackets converts 'a'-'z' to a position 0-25
-	char dec_ch = dmap[ch - 'a'];   // decode at contact position ch - 'a'
+	char dec_ch = dmap.get(ch);   // decode at contact position ch - 'a'
 	int output_contact_position = (dec_ch - 'a' + 26 - pos) % 26;
 	return (char) (output_contact_position + 'a');
     }
