@@ -1,5 +1,5 @@
 import java.util.*;
-public class Rotor {
+public class Rotor extends EnigmaSuper{
     Map <Character, Character> emap = new HashMap<Character, Character>();
     Map <Character, Character> dmap = new HashMap<Character, Character>();
 	//char[] emap, dmap;  // encode map and decode map instance variables

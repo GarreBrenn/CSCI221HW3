@@ -2,7 +2,7 @@ import java.util.Collections;   // for shuffle
 import java.util.Arrays;        // also for shuffle (need asList)
 import java.util.Random;        // for seeding the random number for shuffle
                                 // NOTE: we seed to be able to repeat results
-public class Enigma {
+public class Enigma extends EnigmaSuper{
     /*
       An Enigma object represents the venerable, Enigma Machine, which
       was used by the Nazi's to encrypt communication messages during
@@ -60,15 +60,6 @@ public class Enigma {
 
     // NOTE: you may use this function before/when constructing the
     // reflector, U (which cannot have a self mapping).
-    private boolean check_for_self_mapping(Character[] alphaperm)
-    {
-	for (int i = 0; i < alphaperm.length; i++) {
-            if (alphaperm[i] == i + 'a') {
-		return true;
-	    }
-	}
-	return false;
-    }
 
     public Enigma(Character[] plugboard_settings, String rotor_settings,
 		  int rseed) {
@@ -95,7 +86,7 @@ public class Enigma {
 	do {
 	    // NOTE: we can't use the same seed, else possible infinite loop
 	    Collections.shuffle(Arrays.asList(l), new Random(rseed++));
-	} while (check_for_self_mapping(l));
+	} while (check_for_self_mapping(l) >= 0);
 
 	U = new Reflector(l);
 

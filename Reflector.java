@@ -1,5 +1,5 @@
 import java.util.*;
-public class Reflector {
+public class Reflector extends EnigmaSuper{
     // NOTE:  you need to be able to map and reverse-map
     //        (remember the direction of flow when discussed in class)
     
@@ -13,15 +13,6 @@ public class Reflector {
 
     // helper function that checks for self mapping
     // return -1 if NO self map; otherwise return position of self map
-    private int check_for_self_mapping(Character[] alphaperm)
-    {
-	for (int i = 0; i < alphaperm.length; i++) {
-            if (alphaperm[i] == i + 'a') {
-		return i;
-	    }
-	}
-	return -1;
-    }
 
     public Reflector(Character[] alphaperm) {
 	if (alphaperm.length != 26) {

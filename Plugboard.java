@@ -1,5 +1,5 @@
 import java.util.*;
-public class Plugboard {
+public class Plugboard extends EnigmaSuper{
     //char[] emap1, dmap1;  // encode map and decode map instance variables
 	private Map<Character, Character> emap,dmap;
 
