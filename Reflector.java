@@ -1,10 +1,12 @@
+import java.util.*;
 public class Reflector {
     // NOTE:  you need to be able to map and reverse-map
     //        (remember the direction of flow when discussed in class)
     
     // encryption map array and decryption map array
-    char[] emap, dmap;
-
+    //char[] emap, dmap;
+	private Map<Character, Character> emap = new HashMap<>();
+	private Map<Character, Character> dmap = new HashMap<>();
 
     // alphaperm is a permutation (rearrangement) of ['a','z']
     // NOTE: NO self mappings AND pairwise mapped.
@@ -27,8 +29,8 @@ public class Reflector {
 	    System.exit(1);
 	}
 
-	emap = new char[alphaperm.length];
-	dmap = new char[alphaperm.length];
+	//emap = new char[alphaperm.length];
+	//dmap = new char[alphaperm.length];
 
 	// check for self-mapping
 	int self_map_pos = check_for_self_mapping(alphaperm);
@@ -44,11 +46,12 @@ public class Reflector {
 	}
 	    
 	for (int i = 0; i < alphaperm.length; i++) {  // build encrypt map
-	    emap[i] = alphaperm[i];   // automatically converts to char
+	    emap.put(((char) (i + 'a')), alphaperm[i]);
+		//emap[i] = alphaperm[i];   // automatically converts to char
 	}
 
-	for (int i = 0; i < emap.length; i++) {  // build a reverse map, dmap[]
-            dmap[emap[i] - 'a'] = (char) (i + 'a');
+	for (int i = 0; i < 26; i++) {
+		dmap.put(emap.get((char)(i + 'a')), (char)(i + 'a'));
 	}
 
 	// for debugging below
@@ -69,11 +72,11 @@ public class Reflector {
 
     // encode one character through the reflector
     public char encode(char ch) {
-	return emap[ch - 'a'];
+		return emap.get(ch);
     }
 
     // decode one character through the reflector
     public char decode(char ch) {
-	return dmap[ch - 'a'];
+	return dmap.get(ch);
     }
 }

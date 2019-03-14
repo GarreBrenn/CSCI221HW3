@@ -34,6 +34,7 @@ public class Plugboard {
 
 	    // swap
 		emap.put(p1, p2);
+		emap.put(p2, p1);
 	}
 
 	for (int i = 0; i < 26; i++) {  // build decode (reverse) map
@@ -45,7 +46,7 @@ public class Plugboard {
     // encode one character through the plugboard
     // (you may assume that ch is a valid character in range ['a', 'z']
     public char encode(char ch) {
-	return emap.get(ch);
+		return emap.get(ch);
     }
 
     // decode one character through the plugboard
