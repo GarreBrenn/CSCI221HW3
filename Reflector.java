@@ -5,6 +5,7 @@ public class Reflector {
     // encryption map array and decryption map array
     char[] emap, dmap;
 
+
     // alphaperm is a permutation (rearrangement) of ['a','z']
     // NOTE: NO self mappings AND pairwise mapped.
 
