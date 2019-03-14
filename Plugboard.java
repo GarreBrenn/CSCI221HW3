@@ -10,13 +10,17 @@ public class Plugboard extends EnigmaSuper{
     
     // swaps is a string with upto 10 pairs of characters to swap (eg. "ajqzbw")
     public Plugboard(Character[] swaps) {
-	if (swaps.length > 20) {
-	    System.out.println("Plugboard must have 10 or fewer letter pairs");
-	    System.exit(1);
+    try {
+		if (swaps.length > 20) {
+			throw new Exception ("Plugboard must have 10 or fewer letter pairs");
+		}
+		if (swaps.length % 2 != 0) {
+			throw new Exception ("Plugboard must have even number of letters");
+		}
 	}
-	if (swaps.length % 2 != 0) {
-	    System.out.println("Plugboard must have even number of letters");
-	    System.exit(1);
+    catch (Exception e) {
+    	System.out.println(e.getMessage());
+    	System.exit(1);
 	}
 
 	emap = new HashMap<>();
